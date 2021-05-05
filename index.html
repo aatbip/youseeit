@@ -1,0 +1,109 @@
+<!DOCTYPE html> 
+
+<html> 
+	<head>
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+  		//var socket = io();
+
+	var messages = document.getElementById('messages'); 
+ 	
+	//const EventEmitter = require('events');
+	//const emitter = new EventEmitter()
+	//emitter.setMaxListeners(50)
+
+	
+const socket = io("ws://localhost:3000");
+socket.on('connect', function(data1, imageUrl1, imageUrl2, term) {   //data1
+
+	console.log('socket connected'); 
+});
+socket.on('message', function(data1) {  //data1
+		console.log(data1); 
+	//	var item = document.createElement('p');
+	//	item.textContent = data; 
+	//	messages.appendChild(data); 
+	document.querySelector("#style1").innerHTML= `<p>${data1}</p>`;
+	
+	
+	//window.scrollTo(0, document.body.scrollHeight);
+		
+		
+		//console.log('socket connected');
+	});
+socket.on('message1', function(imageUrl1) {
+	document.querySelector("#image1").innerHTML= `<img src="${imageUrl1}" style="border:1px solid #dddddd; padding:5px; width:650px; height:450px; float:right;border-radius:8px;">`;
+});
+
+socket.on('message2', function(imageUrl2) {
+
+	document.querySelector("#image2").innerHTML= `<img src="${imageUrl2}" style="float:left; width:650px; height:450px; border:1px solid #dddddd; border-radius:8px; padding:5px;">`;
+});
+
+socket.on('keywords', function(term) {
+	document.querySelector("#keywords1").innerHTML= `<p>${term}</p>`;
+});
+		</script>
+<style> 
+	#style1 {
+		height: 100px;
+		width: 1300px; 
+		overflow-x: hidden;
+		overflow-y: hidden;
+		color: green; 
+		white-space: pre-line;
+		display: inline-block; 		 
+		border: 5px solid green; 
+		font-size: 30px;   
+		margin-left: 80px; 
+		margin-right: 50px; 	 
+		border-radius: 4px; 
+		padding: 4px; 
+
+	}
+	#keywords1 {
+		height: 60px;
+		width: 1300px; 
+		color: purple;
+		white-space: pre-line;
+		display: inline-block;
+		border: 5px solid green; 
+		font-size: 25px; 
+		margin-left: 83px;
+		margin-right: 50px;  
+	#image1 {
+            border: 5px solid green; 
+	}
+
+	#image2 {
+            border:5px solid green;
+	}
+
+
+		#messages {
+			color: red; 
+		
+		}
+</style> 
+	</head>
+	<body style="background-color: #ecf9ec;" id="messages">
+		
+		<h1 style="text-align:center;background-color:lightgreen;color:red;border:1px solid green; border-radius:4px; padding:5px;">REAL TIME VISUALIZATION FOR ENHANCED LEARNING</h1>  
+		 
+		<div id="style1"> 
+		</div>
+		 
+		<div id="keywords1">
+		</div> </br>
+		</br> 
+		<div id="image1">
+			</div> 
+			<div id="image2">
+			</div> 
+
+ 
+	</body>
+
+</html> 
+
+	
